@@ -26,9 +26,9 @@
       padding: 20px;
       font-size: 1rem;
       letter-spacing: 0.5px;
-      color: #fff; /* Texto general en blanco para contraste */
+      color: #fff;
 
-      /* Foto de fondo optimizada para móviles (Android e iOS) con filtro más oscuro */
+      /* Foto de fondo optimizada para móviles (Android e iOS) */
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('caceres.jpeg');
       background-size: cover;
       background-position: center;
@@ -36,10 +36,10 @@
       background-attachment: fixed;
     }
     
-    /* Cuadro de texto EXTREMADAMENTE traslúcido (Super Glassmorphism) */
+    /* Cuadro de texto traslúcido */
     .card {
-      background: rgba(255, 255, 255, 0.25); /* Opacidad muy baja (25%) */
-      -webkit-backdrop-filter: blur(15px);   /* Desenfoque más fuerte */
+      background: rgba(255, 255, 255, 0.25);
+      -webkit-backdrop-filter: blur(15px);
       backdrop-filter: blur(15px);
       max-width: 440px;
       width: 100%;
@@ -47,7 +47,7 @@
       border-radius: 16px;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil */
+      border: 1px solid rgba(255, 255, 255, 0.3);
       overflow: hidden;
     }
     
@@ -56,7 +56,7 @@
       font-weight: 400;
       color: #fff;
       text-transform: uppercase;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sombra para legibilidad */
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
 
     h1 {
@@ -90,10 +90,6 @@
     .question { 
       font-size: 1.1rem; 
       margin-bottom: 25px; 
-      line-height: 1.5; 
-      color: #fff;
-      font-weight: 600;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
     
     .option {
@@ -102,7 +98,7 @@
       padding: 16px; 
       margin-bottom: 15px;
       border: 1px solid rgba(255, 255, 255, 0.2); 
-      background: rgba(255, 255, 255, 0.15); /* Botones también traslúcidos */
+      background: rgba(255, 255, 255, 0.15); 
       border-radius: 8px;
       cursor: pointer; 
       font-size: 1rem; 
@@ -137,7 +133,6 @@
       font-size: 1rem; 
       color: #87ceeb; 
       font-weight: 600;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     }
 
     /* Envelope Wrap */
@@ -227,7 +222,6 @@
       border: 1.5px solid #87ceeb;
     }
 
-    /* Detalle de la Bandera LGTB+ en pequeño dentro del sello */
     .lgbt-flag {
       width: 26px;
       height: 16px;
@@ -369,7 +363,7 @@
       border-radius: 8px; 
       font-family: inherit; 
       font-size: 1rem;
-      background: rgba(0, 0, 0, 0.2); /* Fondo oscuro para inputs */
+      background: rgba(0, 0, 0, 0.2);
       color: #fff;
       transition: border-color 0.2s, background 0.2s;
     }
@@ -381,7 +375,7 @@
     }
 
     .rsvp select option {
-        color: #333; /* Texto oscuro en el desplegable */
+      color: #333; /* Texto oscuro para la lista desplegable */
     }
 
     .rsvp textarea { 
@@ -477,6 +471,15 @@
           </select>
         </div>
 
+        <!-- CAMPO: Elección de Menú (Solo Carne o Pescado) -->
+        <div class="form-group">
+          <label for="rsvpMenu">Preferencia de menú (plato principal)</label>
+          <select id="rsvpMenu">
+            <option value="Carne">🥩 Carne</option>
+            <option value="Pescado">🐟 Pescado</option>
+          </select>
+        </div>
+
         <div class="form-group">
           <label for="rsvpGuests">N° de acompañantes</label>
           <input type="number" id="rsvpGuests" placeholder="0" min="0" value="0">
@@ -484,7 +487,7 @@
 
         <div class="form-group">
           <label for="rsvpNote">Alergias o notas especiales</label>
-          <textarea id="rsvpNote" placeholder="Alergias, menú vegetariano, etc. (opcional)"></textarea>
+          <textarea id="rsvpNote" placeholder="Alergias, especificaciones para acompañantes, etc. (opcional)"></textarea>
         </div>
 
         <button type="button" id="rsvpSend">Enviar confirmación</button>
@@ -608,19 +611,20 @@ document.getElementById('addCalendar').addEventListener('click', function(e) {
 document.getElementById('rsvpSend').addEventListener('click', function() {
   const name = document.getElementById('rsvpName').value.trim();
   const attend = document.getElementById('rsvpAttend').value;
+  const menu = document.getElementById('rsvpMenu').value;
   const guests = document.getElementById('rsvpGuests').value || '0';
   const note = document.getElementById('rsvpNote').value.trim();
   const feedback = document.getElementById('rsvpFeedback');
 
   if (!name) {
     feedback.textContent = 'Por favor escribe tu nombre.';
-    feedback.style.color = '#ff6b6b'; /* Color de error más visible */
+    feedback.style.color = '#ff6b6b';
     return;
   }
 
   const subject = encodeURIComponent('Confirmación de asistencia - Boda Javier & Marcelo');
   const body = encodeURIComponent(
-    `Nombre: ${name}\nAsistencia: ${attend}\nAcompañantes: ${guests}\nNotas/Alergias: ${note || 'Ninguna'}`
+    `Nombre: ${name}\nAsistencia: ${attend}\nMenú preferido: ${menu}\nAcompañantes: ${guests}\nNotas/Alergias: ${note || 'Ninguna'}`
   );
   
   window.location.href = `mailto:jserranogarciaortega@gmail.com?subject=${subject}&body=${body}`;
