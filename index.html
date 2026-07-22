@@ -26,33 +26,37 @@
       padding: 20px;
       font-size: 1rem;
       letter-spacing: 0.5px;
-      color: #2b2b2b;
+      color: #fff; /* Texto general en blanco para contraste */
 
-      /* Foto de fondo optimizada para móviles (Android e iOS) */
-      background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('caceres.jpeg');
+      /* Foto de fondo optimizada para móviles (Android e iOS) con filtro más oscuro */
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('caceres.jpeg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      background-attachment: fixed;
     }
     
+    /* Cuadro de texto EXTREMADAMENTE traslúcido (Super Glassmorphism) */
     .card {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(5px);
+      background: rgba(255, 255, 255, 0.25); /* Opacidad muy baja (25%) */
+      -webkit-backdrop-filter: blur(15px);   /* Desenfoque más fuerte */
+      backdrop-filter: blur(15px);
       max-width: 440px;
       width: 100%;
       padding: 40px 30px;
-      border-radius: 8px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil */
       overflow: hidden;
     }
     
     h1, h2, h3 {
       font-family: 'Marcellus', serif;
       font-weight: 400;
-      color: #2b2b2b;
+      color: #fff;
       text-transform: uppercase;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sombra para legibilidad */
     }
 
     h1 {
@@ -74,7 +78,7 @@
       width: 8px; 
       height: 8px; 
       border-radius: 50%; 
-      background: #e0e0e0; 
+      background: rgba(255, 255, 255, 0.3); 
       transition: background 0.3s ease;
     }
     
@@ -84,52 +88,56 @@
     
     /* Quiz elements */
     .question { 
-      font-size: 1.05rem; 
-      margin-bottom: 20px; 
+      font-size: 1.1rem; 
+      margin-bottom: 25px; 
       line-height: 1.5; 
-      color: #444;
-      font-weight: 400;
+      color: #fff;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
     
     .option {
       display: block; 
       width: 100%; 
-      padding: 14px; 
-      margin-bottom: 12px;
-      border: 1px solid #e2e2e2; 
-      background: #fff; 
-      border-radius: 6px;
+      padding: 16px; 
+      margin-bottom: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2); 
+      background: rgba(255, 255, 255, 0.15); /* Botones también traslúcidos */
+      border-radius: 8px;
       cursor: pointer; 
-      font-size: 0.95rem; 
+      font-size: 1rem; 
       font-family: inherit;
-      color: #333;
+      color: #fff;
       letter-spacing: 0.5px;
       transition: all 0.25s ease;
+      font-weight: 500;
     }
     
     .option:hover:not(:disabled) { 
       border-color: #87ceeb; 
-      background: #f0f8ff;
+      background: rgba(135, 206, 235, 0.3);
     }
 
     .option.correct { 
-      background: #87ceeb; 
+      background: rgba(135, 206, 235, 0.8); 
       color: #fff; 
       border-color: #87ceeb; 
+      text-shadow: none;
     }
 
     .option.wrong { 
-      background: #f2f2f2; 
-      color: #aaa; 
-      border-color: #e2e2e2;
+      background: rgba(255, 255, 255, 0.05); 
+      color: rgba(255, 255, 255, 0.4); 
+      border-color: rgba(255, 255, 255, 0.1);
     }
     
     .feedback { 
       min-height: 24px; 
-      margin-top: 12px; 
-      font-size: 0.9rem; 
-      color: #357abd; 
-      font-weight: 500;
+      margin-top: 15px; 
+      font-size: 1rem; 
+      color: #87ceeb; 
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     }
 
     /* Envelope Wrap */
@@ -144,7 +152,7 @@
       width: 100%;
       max-width: 280px;
       height: 180px;
-      margin: 20px auto;
+      margin: 25px auto;
       cursor: pointer;
     }
 
@@ -154,7 +162,7 @@
       height: 100%;
       background: #ffffff;
       border-radius: 6px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
       border: 1px solid #e2e2e2;
     }
 
@@ -205,11 +213,11 @@
       top: 48%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       background: radial-gradient(circle, #ffffff 0%, #f7f5f0 100%);
       border-radius: 50%;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -221,8 +229,8 @@
 
     /* Detalle de la Bandera LGTB+ en pequeño dentro del sello */
     .lgbt-flag {
-      width: 24px;
-      height: 14px;
+      width: 26px;
+      height: 16px;
       border-radius: 2px;
       background: linear-gradient(
         to bottom,
@@ -238,8 +246,8 @@
     }
 
     .seal-text {
-      font-size: 0.55rem;
-      font-weight: 600;
+      font-size: 0.6rem;
+      font-weight: 700;
       color: #555;
       letter-spacing: 0.5px;
     }
@@ -258,7 +266,7 @@
     /* Invitation Reveal */
     .invite { 
       display: none; 
-      margin-top: 25px;
+      margin-top: 30px;
       animation: fadeIn 1s ease forwards; 
     }
 
@@ -269,29 +277,30 @@
 
     .invite img { 
       max-width: 100%; 
-      border-radius: 6px; 
+      border-radius: 8px; 
       margin-bottom: 15px; 
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
 
     /* Action Links & Buttons en Azul Cielo */
     .btn-sky {
       display: block; 
       width: 100%;
-      margin-bottom: 12px; 
-      padding: 12px;
+      margin-bottom: 15px; 
+      padding: 14px;
       background: #87ceeb; 
       color: #fff; 
       text-decoration: none;
-      border-radius: 6px; 
-      font-size: 0.85rem;
-      font-weight: 600;
+      border-radius: 8px; 
+      font-size: 0.9rem;
+      font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
       transition: background 0.2s;
       border: none;
       cursor: pointer;
       text-align: center;
+      text-shadow: none;
     }
 
     .btn-sky:hover {
@@ -300,91 +309,100 @@
 
     .maps-row { 
       display: flex; 
-      gap: 10px; 
-      margin-bottom: 12px; 
+      gap: 12px; 
+      margin-bottom: 15px; 
     }
 
     .maps-row a {
       flex: 1; 
       display: inline-block; 
-      padding: 12px 8px; 
+      padding: 14px 8px; 
       text-decoration: none;
       color: #fff; 
-      background: #87ceeb;
-      border-radius: 6px; 
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px; 
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 1px;
       text-transform: uppercase;
       transition: background 0.2s;
     }
 
     .maps-row a:hover { 
-      background: #70bada; 
+      background: rgba(255, 255, 255, 0.2); 
     }
 
     /* RSVP Form */
     .rsvp { 
-      margin-top: 20px; 
+      margin-top: 30px; 
       text-align: left; 
-      border-top: 1px solid #eee;
-      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 25px;
     }
 
     .rsvp h3 { 
-      font-size: 1.1rem; 
+      font-size: 1.15rem; 
       letter-spacing: 2px;
-      margin-bottom: 16px; 
+      margin-bottom: 20px; 
       text-align: center; 
     }
 
     .form-group {
-      margin-bottom: 12px;
+      margin-bottom: 15px;
     }
 
     .rsvp label {
       display: block;
-      font-size: 0.8rem;
-      color: #666;
-      margin-bottom: 4px;
+      font-size: 0.85rem;
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 6px;
       letter-spacing: 0.5px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     }
 
     .rsvp input, .rsvp select, .rsvp textarea {
       width: 100%; 
-      padding: 11px; 
-      border: 1px solid #ddd; 
-      border-radius: 6px; 
+      padding: 14px; 
+      border: 1px solid rgba(255, 255, 255, 0.2); 
+      border-radius: 8px; 
       font-family: inherit; 
-      font-size: 0.9rem;
-      background: #fafafa;
-      transition: border-color 0.2s;
+      font-size: 1rem;
+      background: rgba(0, 0, 0, 0.2); /* Fondo oscuro para inputs */
+      color: #fff;
+      transition: border-color 0.2s, background 0.2s;
     }
 
     .rsvp input:focus, .rsvp select:focus, .rsvp textarea:focus {
       outline: none;
       border-color: #87ceeb;
-      background: #fff;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .rsvp select option {
+        color: #333; /* Texto oscuro en el desplegable */
     }
 
     .rsvp textarea { 
       resize: vertical; 
-      min-height: 70px; 
+      min-height: 80px; 
     }
 
     .rsvp button {
       width: 100%; 
-      padding: 14px; 
+      padding: 16px; 
       background: #87ceeb; 
       color: #fff;
       border: none; 
-      border-radius: 6px; 
-      font-size: 0.9rem; 
-      font-weight: 600;
+      border-radius: 8px; 
+      font-size: 1rem; 
+      font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       cursor: pointer;
       transition: background 0.2s;
+      margin-top: 10px;
     }
 
     .rsvp button:hover {
@@ -420,7 +438,7 @@
       </div>
     </div>
 
-    <p id="envelopeInstructions" style="color:#888; font-size:0.85rem;">Toca el sello para abrir la invitación</p>
+    <p id="envelopeInstructions" style="color:#fff; font-size:0.9rem; font-weight:600; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Toca el sello para abrir la invitación</p>
 
     <!-- Invitation details -->
     <article class="invite" id="invite">
@@ -596,7 +614,7 @@ document.getElementById('rsvpSend').addEventListener('click', function() {
 
   if (!name) {
     feedback.textContent = 'Por favor escribe tu nombre.';
-    feedback.style.color = '#c0392b';
+    feedback.style.color = '#ff6b6b'; /* Color de error más visible */
     return;
   }
 
@@ -608,7 +626,7 @@ document.getElementById('rsvpSend').addEventListener('click', function() {
   window.location.href = `mailto:jserranogarciaortega@gmail.com?subject=${subject}&body=${body}`;
 
   feedback.textContent = '¡Gracias! Qué ganas de estar con vosotros';
-  feedback.style.color = '#357abd';
+  feedback.style.color = '#87ceeb';
 });
 
 // Inicializar la primera pregunta
