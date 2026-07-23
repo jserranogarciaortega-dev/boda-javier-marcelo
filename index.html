@@ -30,7 +30,7 @@
       position: relative;
     }
 
-    /* Fondo optimizado para móviles (compatibilidad total con iOS y Android) */
+    /* Fondo optimizado para móviles */
     body::before {
       content: "";
       position: fixed;
@@ -39,24 +39,24 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('caceres.jpeg');
+      background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('caceres.jpeg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
     }
     
-    /* Cuadro de texto traslúcido */
+    /* SOLO EL CUADRO MÁS TRANSPARENTE (0.05 de opacidad) */
     .card {
-      background: rgba(255, 255, 255, 0.25);
-      -webkit-backdrop-filter: blur(15px);
-      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.05);
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
       max-width: 440px;
       width: 100%;
       padding: 40px 30px;
       border-radius: 16px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       overflow: hidden;
     }
     
@@ -65,7 +65,7 @@
       font-weight: 400;
       color: #fff;
       text-transform: uppercase;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
 
     h1 {
@@ -99,15 +99,17 @@
     .question { 
       font-size: 1.1rem; 
       margin-bottom: 25px; 
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
     
+    /* Botones de las preguntas opacos y legibles */
     .option {
       display: block; 
       width: 100%; 
       padding: 16px; 
       margin-bottom: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.2); 
-      background: rgba(255, 255, 255, 0.15); 
+      border: 1px solid rgba(255, 255, 255, 0.3); 
+      background: rgba(0, 0, 0, 0.45); 
       border-radius: 8px;
       cursor: pointer; 
       font-size: 1rem; 
@@ -116,24 +118,25 @@
       letter-spacing: 0.5px;
       transition: all 0.25s ease;
       font-weight: 500;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
     }
     
     .option:hover:not(:disabled) { 
       border-color: #87ceeb; 
-      background: rgba(135, 206, 235, 0.3);
+      background: rgba(135, 206, 235, 0.5);
     }
 
     .option.correct { 
-      background: rgba(135, 206, 235, 0.8); 
+      background: rgba(135, 206, 235, 0.9); 
       color: #fff; 
       border-color: #87ceeb; 
       text-shadow: none;
     }
 
     .option.wrong { 
-      background: rgba(255, 255, 255, 0.05); 
+      background: rgba(255, 255, 255, 0.1); 
       color: rgba(255, 255, 255, 0.4); 
-      border-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.15);
     }
     
     .feedback { 
@@ -142,7 +145,7 @@
       font-size: 1.1rem; 
       color: #87ceeb; 
       font-weight: 600;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.9);
     }
 
     /* Envelope Wrap */
@@ -171,7 +174,6 @@
       border: 1px solid #e2e2e2;
     }
 
-    /* Solapa inferior del sobre */
     .envelope-pocket {
       position: absolute;
       bottom: 0;
@@ -185,7 +187,6 @@
       border-bottom-right-radius: 6px;
     }
 
-    /* Solapa lateral izquierda/derecha */
     .envelope-sides {
       position: absolute;
       bottom: 0;
@@ -197,7 +198,6 @@
       z-index: 2;
     }
 
-    /* Solapa Superior desplegable */
     .envelope-flap-top {
       position: absolute;
       top: 0;
@@ -212,7 +212,6 @@
       border-top: 1px solid #eaeaea;
     }
 
-    /* Sello con bandera LGTB+ */
     .wax-seal {
       position: absolute;
       top: 48%;
@@ -256,7 +255,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* Estado abierto */
     .envelope-container.open .envelope-flap-top {
       transform: rotateX(180deg);
       z-index: 1;
@@ -267,7 +265,6 @@
       transform: translate(-50%, -50%) scale(0.5);
     }
 
-    /* Invitation Reveal */
     .invite { 
       display: none; 
       margin-top: 30px;
@@ -323,8 +320,8 @@
       padding: 14px 8px; 
       text-decoration: none;
       color: #fff; 
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 8px; 
       font-size: 0.85rem;
       font-weight: 600;
@@ -334,7 +331,7 @@
     }
 
     .maps-row a:hover { 
-      background: rgba(255, 255, 255, 0.2); 
+      background: rgba(0, 0, 0, 0.65); 
     }
 
     /* RSVP Form */
@@ -363,17 +360,17 @@
       font-weight: 600;
       margin-bottom: 6px;
       letter-spacing: 0.5px;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
     }
 
     .rsvp input, .rsvp select, .rsvp textarea {
       width: 100%; 
       padding: 14px; 
-      border: 1px solid rgba(255, 255, 255, 0.2); 
+      border: 1px solid rgba(255, 255, 255, 0.3); 
       border-radius: 8px; 
       font-family: inherit; 
       font-size: 1rem;
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.5);
       color: #fff;
       transition: border-color 0.2s, background 0.2s;
     }
@@ -381,7 +378,7 @@
     .rsvp input:focus, .rsvp select:focus, .rsvp textarea:focus {
       outline: none;
       border-color: #87ceeb;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.7);
     }
 
     .rsvp select option {
@@ -442,7 +439,7 @@
       </div>
     </div>
 
-    <p id="envelopeInstructions" style="color:#fff; font-size:0.9rem; font-weight:600; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Toca el sello para abrir la invitación</p>
+    <p id="envelopeInstructions" style="color:#fff; font-size:0.9rem; font-weight:600; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Toca el sello para abrir la invitación</p>
 
     <!-- Invitation details -->
     <article class="invite" id="invite">
