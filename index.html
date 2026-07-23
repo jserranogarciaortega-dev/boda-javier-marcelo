@@ -27,13 +27,22 @@
       font-size: 1rem;
       letter-spacing: 0.5px;
       color: #fff;
+      position: relative;
+    }
 
-      /* Foto de fondo optimizada para móviles (Android e iOS) */
+    /* Fondo optimizado para móviles (compatibilidad total con iOS y Android) */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('caceres.jpeg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-attachment: fixed;
     }
     
     /* Cuadro de texto traslúcido */
@@ -130,9 +139,10 @@
     .feedback { 
       min-height: 24px; 
       margin-top: 15px; 
-      font-size: 1rem; 
+      font-size: 1.1rem; 
       color: #87ceeb; 
       font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
     }
 
     /* Envelope Wrap */
@@ -276,7 +286,7 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
 
-    /* Action Links & Buttons en Azul Cielo */
+    /* Action Links & Buttons */
     .btn-sky {
       display: block; 
       width: 100%;
@@ -375,7 +385,7 @@
     }
 
     .rsvp select option {
-      color: #333; /* Texto oscuro para la lista desplegable */
+      color: #333;
     }
 
     .rsvp textarea { 
@@ -471,7 +481,7 @@
           </select>
         </div>
 
-        <!-- CAMPO: Elección de Menú (Solo Carne o Pescado) -->
+        <!-- CAMPO: Elección de Menú -->
         <div class="form-group">
           <label for="rsvpMenu">Preferencia de menú (plato principal)</label>
           <select id="rsvpMenu">
@@ -552,13 +562,17 @@ function handleAnswer(btn, item) {
   const opts = document.querySelectorAll('.option');
   opts.forEach(o => o.disabled = true);
 
+  const feedbackEl = document.getElementById('feedback');
+
   if (chosen === item.correct) {
     btn.classList.add('correct');
-    document.getElementById('feedback').textContent = '¡Correcto!';
+    feedbackEl.textContent = '¡Bieeeen!';
+    feedbackEl.style.color = '#87ceeb';
   } else {
     btn.classList.add('wrong');
     opts[item.correct].classList.add('correct');
-    document.getElementById('feedback').textContent = 'Ups, esa no era... ¡pero sigamos!';
+    feedbackEl.textContent = '¿En serio? ¿No lo sabes? 😡';
+    feedbackEl.style.color = '#ff6b6b';
   }
 
   setTimeout(() => {
@@ -568,7 +582,7 @@ function handleAnswer(btn, item) {
     } else {
       showEnvelope();
     }
-  }, chosen === item.correct ? 800 : 1200);
+  }, chosen === item.correct ? 800 : 1500);
 }
 
 function showEnvelope() {
