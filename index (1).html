@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Nos casamos! — Javier & Marcelo</title>
+  
+  <!-- Tipografía estilo Art Déco (Marcellus + Josefin Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+
+  <style>
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+    
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      color: #fff;
+      position: relative;
+    }
+
+    /* Fondo optimizado para móviles */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('caceres.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    /* SOLO EL CUADRO MÁS TRANSPARENTE (0.05 de opacidad) */
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
+      max-width: 440px;
+      width: 100%;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      overflow: hidden;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Marcellus', serif;
+      font-weight: 400;
+      color: #fff;
+      text-transform: uppercase;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    }
+
+    h1 {
+      letter-spacing: 3px;
+      font-size: 1.35rem;
+      margin-bottom: 25px;
+      line-height: 1.4;
+    }
+    
+    /* Progress Dots */
+    .progress { 
+      display: flex; 
+      gap: 8px; 
+      justify-content: center; 
+      margin-bottom: 25px; 
+    }
+    
+    .dot { 
+      width: 8px; 
+      height: 8px; 
+      border-radius: 50%; 
+      background: rgba(255, 255, 255, 0.3); 
+      transition: background 0.3s ease;
+    }
+    
+    .dot.active { 
+      background: #87ceeb; 
+    }
+    
+    /* Quiz elements */
+    .question { 
+      font-size: 1.1rem; 
+      margin-bottom: 25px; 
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    }
+    
+    /* Botones de las preguntas opacos y legibles */
+    .option {
+      display: block; 
+      width: 100%; 
+      padding: 16px; 
+      margin-bottom: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.3); 
+      background: rgba(0, 0, 0, 0.45); 
+      border-radius: 8px;
+      cursor: pointer; 
+      font-size: 1rem; 
+      font-family: inherit;
+      color: #fff;
+      letter-spacing: 0.5px;
+      transition: all 0.25s ease;
+      font-weight: 500;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    }
+    
+    .option:hover:not(:disabled) { 
+      border-color: #87ceeb; 
+      background: rgba(135, 206, 235, 0.5);
+    }
+
+    .option.correct { 
+      background: rgba(135, 206, 235, 0.9); 
+      color: #fff; 
+      border-color: #87ceeb; 
+      text-shadow: none;
+    }
+
+    .option.wrong { 
+      background: rgba(255, 255, 255, 0.1); 
+      color: rgba(255, 255, 255, 0.4); 
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    .feedback { 
+      min-height: 24px; 
+      margin-top: 15px; 
+      font-size: 1.1rem; 
+      color: #87ceeb; 
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+    }
+
+    /* Envelope Wrap */
+    .envelope-wrap { 
+      display: none; 
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    /* SOBRE BLANCO ELEGANTE */
+    .envelope-container {
+      perspective: 1000px;
+      width: 100%;
+      max-width: 280px;
+      height: 180px;
+      margin: 25px auto;
+      cursor: pointer;
+    }
+
+    .envelope-3d {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      border-radius: 6px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      border: 1px solid #e2e2e2;
+    }
+
+    .envelope-pocket {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%);
+      clip-path: polygon(0% 100%, 50% 45%, 100% 100%);
+      z-index: 3;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+
+    .envelope-sides {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #f0f0f0;
+      clip-path: polygon(0 0, 50% 50%, 0 100%, 100% 100%, 50% 50%, 100% 0);
+      z-index: 2;
+    }
+
+    .envelope-flap-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fcfcfc;
+      clip-path: polygon(0 0, 100% 0, 50% 55%);
+      transform-origin: top;
+      transition: transform 0.6s ease-in-out, z-index 0.6s ease-in-out;
+      z-index: 4;
+      border-top: 1px solid #eaeaea;
+    }
+
+    .wax-seal {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, #ffffff 0%, #f7f5f0 100%);
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      border: 1.5px solid #87ceeb;
+    }
+
+    .lgbt-flag {
+      width: 26px;
+      height: 16px;
+      border-radius: 2px;
+      background: linear-gradient(
+        to bottom,
+        #e53935 0%, #e53935 16.6%,
+        #fb8c00 16.6%, #fb8c00 33.3%,
+        #fdd835 33.3%, #fdd835 50%,
+        #43a047 50%, #43a047 66.6%,
+        #1e88e5 66.6%, #1e88e5 83.3%,
+        #8e24aa 83.3%, #8e24aa 100%
+      );
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      margin-bottom: 2px;
+    }
+
+    .seal-text {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #555;
+      letter-spacing: 0.5px;
+    }
+
+    .envelope-container.open .envelope-flap-top {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-container.open .wax-seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    .invite { 
+      display: none; 
+      margin-top: 30px;
+      animation: fadeIn 1s ease forwards; 
+    }
+
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(12px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+
+    .invite img { 
+      max-width: 100%; 
+      border-radius: 8px; 
+      margin-bottom: 15px; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    /* Action Links & Buttons */
+    .btn-sky {
+      display: block; 
+      width: 100%;
+      margin-bottom: 15px; 
+      padding: 14px;
+      background: #87ceeb; 
+      color: #fff; 
+      text-decoration: none;
+      border-radius: 8px; 
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      text-shadow: none;
+    }
+
+    .btn-sky:hover {
+      background: #70bada;
+    }
+
+    .maps-row { 
+      display: flex; 
+      gap: 12px; 
+      margin-bottom: 15px; 
+    }
+
+    .maps-row a {
+      flex: 1; 
+      display: inline-block; 
+      padding: 14px 8px; 
+      text-decoration: none;
+      color: #fff; 
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px; 
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+
+    .maps-row a:hover { 
+      background: rgba(0, 0, 0, 0.65); 
+    }
+
+    /* RSVP Form */
+    .rsvp { 
+      margin-top: 30px; 
+      text-align: left; 
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 25px;
+    }
+
+    .rsvp h3 { 
+      font-size: 1.15rem; 
+      letter-spacing: 2px;
+      margin-bottom: 20px; 
+      text-align: center; 
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .rsvp label {
+      display: block;
+      font-size: 0.85rem;
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+
+    .rsvp input, .rsvp select, .rsvp textarea {
+      width: 100%; 
+      padding: 14px; 
+      border: 1px solid rgba(255, 255, 255, 0.3); 
+      border-radius: 8px; 
+      font-family: inherit; 
+      font-size: 1rem;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .rsvp input:focus, .rsvp select:focus, .rsvp textarea:focus {
+      outline: none;
+      border-color: #87ceeb;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .rsvp select option {
+      color: #333;
+    }
+
+    .rsvp textarea { 
+      resize: vertical; 
+      min-height: 80px; 
+    }
+
+    .rsvp button {
+      width: 100%; 
+      padding: 16px; 
+      background: #87ceeb; 
+      color: #fff;
+      border: none; 
+      border-radius: 8px; 
+      font-size: 1rem; 
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 10px;
+    }
+
+    .rsvp button:hover {
+      background: #70bada;
+    }
+  </style>
+</head>
+<body>
+
+<main class="card">
+
+  <!-- Quiz Section -->
+  <section id="quiz">
+    <h1>Antes de la sorpresa...</h1>
+    <div class="progress" id="progress"></div>
+    <div id="question-box"></div>
+  </section>
+
+  <!-- Envelope & Reveal Section -->
+  <section class="envelope-wrap" id="envelopeWrap">
+    <h1>¡Estás dentro, aunque hayas fallado!</h1>
+    
+    <!-- SOBRE BLANCO CON BANDERA LGTB+ -->
+    <div class="envelope-container" id="envelope" role="button" aria-label="Abrir sobre de invitación" tabindex="0">
+      <div class="envelope-3d">
+        <div class="envelope-flap-top"></div>
+        <div class="envelope-sides"></div>
+        <div class="envelope-pocket"></div>
+        <div class="wax-seal">
+          <div class="lgbt-flag"></div>
+          <span class="seal-text">J&M</span>
+        </div>
+      </div>
+    </div>
+
+    <p id="envelopeInstructions" style="color:#fff; font-size:0.9rem; font-weight:600; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Toca el sello para abrir la invitación</p>
+
+    <!-- Invitation details -->
+    <article class="invite" id="invite">
+      <img src="invitacion.jpg" alt="Invitación oficial de la boda de Javier y Marcelo">
+
+      <!-- Botón Descargar Invitación -->
+      <a href="invitacion.jpg" download="Invitacion-Javier-y-Marcelo.jpg" class="btn-sky">
+        📥 Descargar Invitación
+      </a>
+
+      <div class="maps-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Palacio+de+la+Isla+Caceres" target="_blank" rel="noopener">
+          📍 Ceremonia
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Pandehuerta+Caceres" target="_blank" rel="noopener">
+          🍽️ Comida
+        </a>
+      </div>
+
+      <a id="addCalendar" href="#" class="btn-sky">📅 Añadir al calendario</a>
+
+      <!-- RSVP Form -->
+      <form class="rsvp" id="rsvpForm" onsubmit="return false;">
+        <h3>Confirma tu asistencia</h3>
+        
+        <div class="form-group">
+          <label for="rsvpName">Nombre completo</label>
+          <input type="text" id="rsvpName" placeholder="Tu nombre" required>
+        </div>
+
+        <div class="form-group">
+          <label for="rsvpAttend">¿Nos acompañarás?</label>
+          <select id="rsvpAttend">
+            <option value="Sí, asistiré">Sí, asistiré</option>
+            <option value="No podré asistir">No podré asistir</option>
+          </select>
+        </div>
+
+        <!-- CAMPO: Elección de Menú -->
+        <div class="form-group">
+          <label for="rsvpMenu">Preferencia de menú (plato principal)</label>
+          <select id="rsvpMenu">
+            <option value="Carne">🥩 Carne</option>
+            <option value="Pescado">🐟 Pescado</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="rsvpGuests">N° de acompañantes</label>
+          <input type="number" id="rsvpGuests" placeholder="0" min="0" value="0">
+        </div>
+
+        <div class="form-group">
+          <label for="rsvpNote">Alergias o notas especiales</label>
+          <textarea id="rsvpNote" placeholder="Alergias, especificaciones para acompañantes, etc. (opcional)"></textarea>
+        </div>
+
+        <button type="button" id="rsvpSend">Enviar confirmación</button>
+        <div class="feedback" id="rsvpFeedback" aria-live="polite"></div>
+      </form>
+    </article>
+  </section>
+
+</main>
+
+<script>
+const questions = [
+  {
+    q: "¿En qué año se conocieron Javier y Marcelo?",
+    options: ["2015", "2017", "2020"],
+    correct: 1
+  },
+  {
+    q: "¿Cuál es uno de sus planes favoritos?",
+    options: ["Ir a conciertos", "Quedarse en casa sin hacer nada", "Ver la tele solos"],
+    correct: 0
+  },
+  {
+    q: "¿Qué les encanta hacer juntos?",
+    options: ["Viajar", "Nada, casi no salen", "Trabajar todo el día"],
+    correct: 0
+  },
+  {
+    q: "¿Qué valoran mucho en su vida?",
+    options: ["Estar con la familia y amigos", "Estar solos siempre", "Evitar reuniones"],
+    correct: 0
+  }
+];
+
+let current = 0;
+const box = document.getElementById('question-box');
+const progress = document.getElementById('progress');
+
+function renderProgress() {
+  progress.innerHTML = questions.map((_, i) =>
+    `<div class="dot ${i <= current ? 'active' : ''}"></div>`
+  ).join('');
+}
+
+function renderQuestion() {
+  renderProgress();
+  const item = questions[current];
+  box.innerHTML = `
+    <div class="question">${item.q}</div>
+    ${item.options.map((opt, i) =>
+      `<button class="option" data-i="${i}">${opt}</button>`
+    ).join('')}
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+  `;
+  document.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => handleAnswer(btn, item));
+  });
+}
+
+function handleAnswer(btn, item) {
+  const chosen = parseInt(btn.dataset.i, 10);
+  const opts = document.querySelectorAll('.option');
+  opts.forEach(o => o.disabled = true);
+
+  const feedbackEl = document.getElementById('feedback');
+
+  if (chosen === item.correct) {
+    btn.classList.add('correct');
+    feedbackEl.textContent = '¡Bieeeen!';
+    feedbackEl.style.color = '#87ceeb';
+  } else {
+    btn.classList.add('wrong');
+    opts[item.correct].classList.add('correct');
+    feedbackEl.textContent = '¿En serio? ¿No lo sabes? 😡';
+    feedbackEl.style.color = '#ff6b6b';
+  }
+
+  setTimeout(() => {
+    current++;
+    if (current < questions.length) {
+      renderQuestion();
+    } else {
+      showEnvelope();
+    }
+  }, chosen === item.correct ? 800 : 1500);
+}
+
+function showEnvelope() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('envelopeWrap').style.display = 'block';
+}
+
+const envelopeEl = document.getElementById('envelope');
+envelopeEl.addEventListener('click', openEnvelope);
+envelopeEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') openEnvelope();
+});
+
+function openEnvelope() {
+  if (envelopeEl.classList.contains('open')) return;
+  
+  envelopeEl.classList.add('open');
+  document.getElementById('envelopeInstructions').style.display = 'none';
+  setTimeout(() => {
+    document.getElementById('invite').style.display = 'block';
+  }, 600);
+}
+
+// Evento Google Calendar
+document.getElementById('addCalendar').addEventListener('click', function(e) {
+  e.preventDefault();
+  const start = '20260912T130000';
+  const end = '20260912T180000';
+  
+  const details = encodeURIComponent(
+    'Boda de Javier y Marcelo. Ceremonia en el Palacio de la Isla, comida en Restaurante Pandehuerta.'
+  );
+  const location = encodeURIComponent('Palacio de la Isla, Cáceres');
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Javier+%26+Marcelo&dates=${start}/${end}&details=${details}&location=${location}`;
+  
+  window.open(url, '_blank');
+});
+
+// Confirmación RSVP por Mailto
+document.getElementById('rsvpSend').addEventListener('click', function() {
+  const name = document.getElementById('rsvpName').value.trim();
+  const attend = document.getElementById('rsvpAttend').value;
+  const menu = document.getElementById('rsvpMenu').value;
+  const guests = document.getElementById('rsvpGuests').value || '0';
+  const note = document.getElementById('rsvpNote').value.trim();
+  const feedback = document.getElementById('rsvpFeedback');
+
+  if (!name) {
+    feedback.textContent = 'Por favor escribe tu nombre.';
+    feedback.style.color = '#ff6b6b';
+    return;
+  }
+
+  const subject = encodeURIComponent('Confirmación de asistencia - Boda Javier & Marcelo');
+  const body = encodeURIComponent(
+    `Nombre: ${name}\nAsistencia: ${attend}\nMenú preferido: ${menu}\nAcompañantes: ${guests}\nNotas/Alergias: ${note || 'Ninguna'}`
+  );
+  
+  window.location.href = `mailto:jserranogarciaortega@gmail.com?subject=${subject}&body=${body}`;
+
+  feedback.textContent = '¡Gracias! Qué ganas de estar con vosotros';
+  feedback.style.color = '#87ceeb';
+});
+
+// Inicializar la primera pregunta
+renderQuestion();
+</script>
+
+</body>
+</html>
